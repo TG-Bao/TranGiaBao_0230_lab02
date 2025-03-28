@@ -1,32 +1,129 @@
 @model ShoppingCart
 
 @{
-    ViewData["Title"] = "Cart";
+    ViewData["Title"] = "Shopping Cart";
 }
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Your Cart</h2>
-    <div class="row">
-        @foreach (var item in Model.Items)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text">Quantity: @item.Quantity</p>
-                        <p class="card-text">Price: @item.Price.ToString("C")</p>
-                        <p class="card-text">Total: @(item.Price * item.Quantity)</p>
-                        <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="btn btn-danger">Remove</a>
+
+<div class="container py-5">
+    <h2 class="text-center mb-5">Shopping Cart</h2>
+
+    @if (!Model.Items.Any())
+    {
+        <div class="text-center empty-cart">
+            <i class="bi bi-cart-x display-1 mb-4"></i>
+            <h3>Your cart is empty</h3>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Continue Shopping</a>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="cart-header mb-4">
+                    <div class="row">
+                        <div class="col-md-6"><strong>Product Name</strong></div>
+                        <div class="col-md-2 text-center"><strong>Quantity</strong></div>
+                        <div class="col-md-2 text-end"><strong>Price</strong></div>
+                        <div class="col-md-2 text-end"><strong>Action</strong></div>
+                    </div>
+                </div>
+
+                @foreach (var item in Model.Items)
+                {
+                    <div class="cart-item mb-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h5 class="cart-item-name">@item.Name</h5>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <span class="quantity-badge">@item.Quantity</span>
+                            </div>
+                            <div class="col-md-2 text-end">
+                                <span class="price">@item.Price.ToString("#,##0") VNĐ</span>
+                            </div>
+                            <div class="col-md-2 text-end">
+                                <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId"
+                                   class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="cart-summary mt-4 pt-4 border-top">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> Continue Shopping
+                            </a>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <div class="total-price mb-3">
+                                Total: <span class="h4 ms-2">@Model.GetTotalPrice().ToString("#,##0") VNĐ</span>
+                            </div>
+                            <a asp-controller="ShoppingCart" asp-action="Checkout"
+                               class="btn btn-primary btn-lg">
+                                Proceed to Checkout <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        }
-    </div>
-    <div class="text-right mt-4">
-        <h4>Total Price: @Model.GetTotalPrice().ToString("C")</h4>
-        <a asp-controller="ShoppingCart" asp-action="Checkout" class="btn btn-success">Thanh Toán</a>
-    </div>
-    <div class="text-center mt-4">
-        
-        <a asp-controller="Home" asp-action="Index" class="btn btn-success">Quay lại</a>
-    </div>
+        </div>
+    }
 </div>
+
+<style>
+    .cart-header {
+        font-weight: bold;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 1rem;
+    }
+
+    .cart-item {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .cart-item-name {
+        font-size: 1.2rem;
+        margin-bottom: 0;
+    }
+
+    .quantity-badge {
+        background: #f8f9fa;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+    }
+
+    .price {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .total-price {
+        color: #2c3e50;
+    }
+
+    .empty-cart {
+        color: #6c757d;
+        padding: 3rem 0;
+    }
+
+    .btn-outline-danger {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
