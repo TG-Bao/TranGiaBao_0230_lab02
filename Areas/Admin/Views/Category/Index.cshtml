@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TranGiaBao_0230_lab02.Models.Category>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Category List";
+}
+
+<h2>Categories</h2>
+
+<a class="btn btn-outline-warning mb-3" asp-action="Add">Add Category</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.Name</td>
+                <td>
+                    <a class="btn btn-primary me-2" asp-action="Update" asp-route-id="@category.Id">
+                        <i class="fa fa-edit"></i> Edit
+                    </a>
+                    <a class="btn btn-success" asp-action="Delete" asp-route-id="@category.Id">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

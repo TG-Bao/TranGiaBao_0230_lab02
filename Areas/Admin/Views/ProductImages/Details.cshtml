@@ -1,0 +1,18 @@
+﻿@model TranGiaBao_0230_lab02.Models.ProductImage
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<hr />
+<div class="form-group">
+    <h3>Url: @Model.Url</h3>
+    <img src="~wwwroot/images/@Model.Url" alt="Product Image" style="max-width: 300px;" />
+    <p>@Model.ProductId</p> 
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

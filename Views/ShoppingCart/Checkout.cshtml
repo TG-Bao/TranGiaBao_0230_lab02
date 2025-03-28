@@ -1,0 +1,38 @@
+@model Order
+@{
+    ViewData["Title"] = "Checkout";
+}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Checkout</h2>
+    <form asp-action="Checkout" method="post">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="BuyerName" class="form-label">Buyer Name</label>
+                <input asp-for="BuyerName" class="form-control" />
+                <span asp-validation-for="BuyerName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="ShippingAddress" class="form-label">Shipping Address</label>
+                <input asp-for="ShippingAddress" class="form-control" />
+                <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Notes" class="form-label">Notes</label>
+                <textarea asp-for="Notes" class="form-control"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-primary">Place Order</button>
+            </div>
+        </div>
+    </form>
+</div>

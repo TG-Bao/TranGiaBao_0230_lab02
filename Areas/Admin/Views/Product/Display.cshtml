@@ -1,0 +1,25 @@
+﻿@model TranGiaBao_0230_lab02.Models.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Product Detail";
+}
+<h2>@Model.Name</h2>
+<div>
+    <div class="form-group">
+        <h3>Price: @Model.Price</h3>
+        <p>@Model.Description</p> 
+        <img src="@Model.ImageUrl" alt="Product Image" style="max-width: 300px;" />
+       
+        @if (Model.Images != null && Model.Images.Any())
+        {
+            <div>
+                @foreach (var img in Model.Images)
+                {
+                    <img src="@img" alt="Additional Product Image" style="max-width: 200px; margin: 5px;" />
+                }
+            </div>
+        }
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

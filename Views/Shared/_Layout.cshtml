@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TranGiaBao_0230_lab02</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+   
+  <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="/Home/Index">Trần Gia Bảo - 2280600230</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="/Home/Index">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">Sản phẩm</a></li>
+           <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Thể loại</a></li>
+          <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Add">ADD product</a></li>
+          <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Add">ADD Category</a></li>
+          <partial  name="_LoginPartial"/>
+          <form class="d-flex">
+            <a asp-controller="ShoppingCart" asp-action="Index" class="btn btn-outline-dark" type="submit">
+              <i class="bi-cart-fill me-1"></i>
+              Cart
+            </a>
+          </form>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+     <!-- Hero Section -->
+  <header class="text-white text-center py-4">
+    <div class="container">
+      <h1>Chào mừng đến với cửa hàng <br> Công nghệ 5.0 </h1>
+      <p style="font-size: 14px;">Chuyên cung cấp các sản phẩm chất lượng với giá tốt nhất</p>
+      <a href="/Product/Index" class="btn btn-light btn-lg">Mua ngay</a>
+    </div>
+  </header>
+
+    <div class="container py-5">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - TranGiaBao_0230_lab02 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/b64cfa36f0.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,32 @@
+@model ShoppingCart
+
+@{
+    ViewData["Title"] = "Cart";
+}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Your Cart</h2>
+    <div class="row">
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">Quantity: @item.Quantity</p>
+                        <p class="card-text">Price: @item.Price.ToString("C")</p>
+                        <p class="card-text">Total: @(item.Price * item.Quantity)</p>
+                        <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="btn btn-danger">Remove</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="text-right mt-4">
+        <h4>Total Price: @Model.GetTotalPrice().ToString("C")</h4>
+        <a asp-controller="ShoppingCart" asp-action="Checkout" class="btn btn-success">Thanh Toán</a>
+    </div>
+    <div class="text-center mt-4">
+        
+        <a asp-controller="Home" asp-action="Index" class="btn btn-success">Quay lại</a>
+    </div>
+</div>
